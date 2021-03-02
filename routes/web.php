@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('register-step2', [\App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create');
+
+    Route::post('register-step2', [\App\Http\Controllers\RegisterStepTwoController::class, 'store'])->name('register-step2.post');
+});
