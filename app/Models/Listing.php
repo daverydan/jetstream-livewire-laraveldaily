@@ -25,4 +25,9 @@ class Listing extends Model implements HasMedia
             ->width(200)
             ->height(200);
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
