@@ -37,7 +37,9 @@ class ListingController extends Controller
      */
     public function store(StoreListingRequest $request)
     {
-        Listing::create($request->validated());
+        // Listing::create($request->validated() + ['user_id' => auth()->id()]);
+        // Listing::create($request->validated());
+        auth()->user()->listings()->create($request->validated());
         return redirect()->route('listings.index');
     }
 
