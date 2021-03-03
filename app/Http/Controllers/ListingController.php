@@ -70,7 +70,8 @@ class ListingController extends Controller
     public function edit(Listing $listing)
     {
         $this->authorize('update', $listing);
-        return view('listings.edit', compact('listing'));
+        $media = $listing->getMedia('listings');
+        return view('listings.edit', compact('listing', 'media'));
     }
 
     /**
@@ -84,6 +85,12 @@ class ListingController extends Controller
     {
         $this->authorize('update', $listing);
         $listing->update($request->validated());
+        // photos
+        for ($i = 1; $i <= 3; $i++) {
+            if ($request->hasFile('photo' . $i)) {
+                $listing->addMediaFromRequest('photo' . $i)->toMediaCollection('listings');
+            }
+        }
         return redirect()->route('listings.index');
     }
 
@@ -97,6 +104,16 @@ class ListingController extends Controller
     {
         $this->authorize('delete', $listing);
         $listing->delete();
+        return back();
+    }
+
+    public function deletePhoto($listingId, $photoId)
+    {
+        $listing = Listing::where('user_id', auth()->id())->findOrFail($listingId);
+        $photo = $listing->getMedia('listings')->where('id', $photoId)->first();
+        if ($photo) {
+            $photo->delete();
+        }
         return back();
     }
 }

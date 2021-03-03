@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <x-jet-validation-errors class="mb-4" />
 
-            <form method="POST" action="{{ route('listings.update', $listing) }}">
+            <form method="POST" action="{{ route('listings.update', $listing) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -35,6 +35,42 @@
                 @error('price')
                     <div class="text-sm text-red-600 mt-1">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="photo1" value="{{ __('Photo 1') }}" />
+                @if (isset($media[0]))
+                    <div class="mt-2 mb-4">
+                        <a href="{{ route('listings.deletePhoto', [$listing->id, $media[0]->id]) }}" onclick="return confirm("Are you sure?")"><strong>X</strong></a>
+                        <img src="{{ $media[0]->getUrl('thumb') }}">
+                    </div>
+                @else
+                    <input type="file" name="photo1" id="photo1">
+                @endif
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="photo2" value="{{ __('Photo 2') }}" />
+                @if (isset($media[1]))
+                    <div class="mt-2 mb-4">
+                        <a href="{{ route('listings.deletePhoto', [$listing->id, $media[1]->id]) }}" onclick="return confirm("Are you sure?")"><strong>X</strong></a>
+                        <img src="{{ $media[1]->getUrl('thumb') }}">
+                    </div>
+                @else
+                    <input type="file" name="photo2" id="photo2">
+                @endif
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="photo3" value="{{ __('Photo 3') }}" />
+                @if (isset($media[2]))
+                    <div class="mt-2 mb-4">
+                        <a href="{{ route('listings.deletePhoto', [$listing->id, $media[2]->id]) }}" onclick="return confirm("Are you sure?")"><strong>X</strong></a>
+                        <img src="{{ $media[2]->getUrl('thumb') }}">
+                    </div>
+                @else
+                    <input type="file" name="photo3" id="photo3">
+                @endif
             </div>
 
             <div class="flex items-center mt-6">
