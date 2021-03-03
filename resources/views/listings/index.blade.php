@@ -12,6 +12,7 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
@@ -21,6 +22,11 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($listings as $listing)
                             <tr>
+                                <td class="px-6 py-4">
+                                    @if ($listing->getFirstMediaUrl('listings', 'thumb'))
+                                        <img src="{{ $listing->getFirstMediaUrl('listings', 'thumb') }}" alt="{{ $listing->title }}">
+                                    @endif
+                                </td>
                                 <td class="px-6 py-4">{{ $listing->title }}</td>
                                 <td class="px-6 py-4">{{ $listing->description }}</td>
                                 <td class="px-6 py-4">${{ $listing->price }}</td>

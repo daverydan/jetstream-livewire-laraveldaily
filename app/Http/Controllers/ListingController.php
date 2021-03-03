@@ -37,9 +37,16 @@ class ListingController extends Controller
      */
     public function store(StoreListingRequest $request)
     {
+        // dd($request->all());
         // Listing::create($request->validated() + ['user_id' => auth()->id()]);
         // Listing::create($request->validated());
-        auth()->user()->listings()->create($request->validated());
+        // auth()->user()->listings()->create($request->validated());
+        $listing = auth()->user()->listings()->create($request->validated());
+        for ($i = 1; $i <= 3; $i++) {
+            if ($request->hasFile('photo' . $i)) {
+                $listing->addMediaFromRequest('photo' . $i)->toMediaCollection('listings');
+            }
+        }
         return redirect()->route('listings.index');
     }
 
