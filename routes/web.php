@@ -22,13 +22,18 @@ Route::get('/', function () {
 // })->name('dashboard');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::group(['middleware' => ['registration_completed']], function() {
+    Route::group(['middleware' => ['registration_completed']], function () {
+        // Dashboard
         Route::get('/dashboard', function () {
             return view('dashboard');
         })->name('dashboard');
     });
 
+    // Register Step 2
     Route::get('register-step2', [\App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create');
 
     Route::post('register-step2', [\App\Http\Controllers\RegisterStepTwoController::class, 'store'])->name('register-step2.post');
+
+    // Listings
+    Route::resource('listings', \App\Http\Controllers\ListingController::class);
 });
