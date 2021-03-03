@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreListingRequest;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,9 @@ class ListingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoreListingRequest $request)
     {
-        Listing::create(request()->all());
+        Listing::create($request->all());
         return redirect()->route('listings.index');
     }
 
