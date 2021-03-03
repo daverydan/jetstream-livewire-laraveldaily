@@ -22,7 +22,9 @@ class ListingFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->text(20),
+            'description' => $this->faker->text(200),
+            'price' => rand(10, 999),
         ];
     }
 }
