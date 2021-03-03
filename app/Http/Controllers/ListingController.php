@@ -62,6 +62,7 @@ class ListingController extends Controller
      */
     public function edit(Listing $listing)
     {
+        $this->authorize('update', $listing);
         return view('listings.edit', compact('listing'));
     }
 
@@ -74,6 +75,7 @@ class ListingController extends Controller
      */
     public function update(StoreListingRequest $request, Listing $listing)
     {
+        $this->authorize('update', $listing);
         $listing->update($request->validated());
         return redirect()->route('listings.index');
     }
@@ -86,6 +88,7 @@ class ListingController extends Controller
      */
     public function destroy(Listing $listing)
     {
+        $this->authorize('delete', $listing);
         $listing->delete();
         return back();
     }
