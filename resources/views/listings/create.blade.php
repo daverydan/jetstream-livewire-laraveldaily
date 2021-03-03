@@ -36,6 +36,30 @@
                 @enderror
             </div>
 
+            <div class="mt-4">
+                <x-jet-label for="photo1" value="{{ __('Photo 1') }}" />
+                <input type="file" name="photo1" id="photo1">
+                @error('photo1')
+                    <div class="text-sm text-red-600 mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="photo2" value="{{ __('Photo 2') }}" />
+                <input type="file" name="photo2" id="photo2">
+                @error('photo2')
+                    <div class="text-sm text-red-600 mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="photo3" value="{{ __('Photo 3') }}" />
+                <input type="file" name="photo3" id="photo3">
+                @error('photo3')
+                    <div class="text-sm text-red-600 mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="flex items-center mt-6">
                 <x-jet-button>
                     {{ __('Save') }}
