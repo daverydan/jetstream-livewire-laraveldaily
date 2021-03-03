@@ -30,4 +30,14 @@ class Listing extends Model implements HasMedia
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class);
+    }
+
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class);
+    }
 }

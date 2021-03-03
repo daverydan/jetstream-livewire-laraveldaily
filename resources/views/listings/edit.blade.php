@@ -82,6 +82,24 @@
                 @endforeach
             </div>
 
+            <div class="mt-4">
+                <x-jet-label for="sizes" value="{{ __('Sizes') }}" />
+                @foreach ($sizes as $size)
+                    <input type="checkbox" name="sizes[]" id="sizes" value="{{ $size->id }}" @if (in_array($size->id, $listing->sizes->pluck('id')->toArray())) checked @endif>
+                    {{ $size->name }}
+                    <br>
+                @endforeach
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="colors" value="{{ __('Colors') }}" />
+                @foreach ($colors as $color)
+                    <input type="checkbox" name="colors[]" id="colors" value="{{ $color->id }}" @if (in_array($color->id, $listing->colors->pluck('id')->toArray())) checked @endif>
+                    {{ $color->name }}
+                    <br>
+                @endforeach
+            </div>
+
             <div class="flex items-center mt-6">
                 <x-jet-button>
                     {{ __('Save') }}
