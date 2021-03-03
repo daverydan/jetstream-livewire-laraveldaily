@@ -73,6 +73,15 @@
                 @endif
             </div>
 
+            <div class="mt-4">
+                <x-jet-label for="categories" value="{{ __('Categories') }}" />
+                @foreach ($categories as $category)
+                    <input type="checkbox" name="categories[]" id="categories" value="{{ $category->id }}" @if (in_array($category->id, $listing->categories->pluck('id')->toArray())) checked @endif>
+                    {{ $category->name }}
+                    <br>
+                @endforeach
+            </div>
+
             <div class="flex items-center mt-6">
                 <x-jet-button>
                     {{ __('Save') }}

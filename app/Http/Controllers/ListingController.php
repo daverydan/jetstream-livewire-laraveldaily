@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreListingRequest;
+use App\Models\Category;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class ListingController extends Controller
      */
     public function index()
     {
-        $listings = Listing::all();
+        $listings = Listing::with('categories')->get();
         return view('listings.index', compact('listings'));
     }
 
@@ -26,7 +27,8 @@ class ListingController extends Controller
      */
     public function create()
     {
-        return view('listings.create');
+        $categories = Category::all();
+        return view('listings.create', compact('categories'));
     }
 
     /**
@@ -47,6 +49,7 @@ class ListingController extends Controller
                 $listing->addMediaFromRequest('photo' . $i)->toMediaCollection('listings');
             }
         }
+        $listing->categories()->attach($request->categories);
         return redirect()->route('listings.index');
     }
 
@@ -70,8 +73,10 @@ class ListingController extends Controller
     public function edit(Listing $listing)
     {
         $this->authorize('update', $listing);
+        $listing->load('categories');
         $media = $listing->getMedia('listings');
-        return view('listings.edit', compact('listing', 'media'));
+        $categories = Category::all();
+        return view('listings.edit', compact('listing', 'media', 'categories'));
     }
 
     /**
@@ -91,6 +96,7 @@ class ListingController extends Controller
                 $listing->addMediaFromRequest('photo' . $i)->toMediaCollection('listings');
             }
         }
+        $listing->categories()->sync($request->categories);
         return redirect()->route('listings.index');
     }
 

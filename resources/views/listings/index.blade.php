@@ -15,6 +15,7 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categories</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                             <th class="relative px-6 py-3" colspan="2"></th>
                         </tr>
@@ -29,6 +30,11 @@
                                 </td>
                                 <td class="px-6 py-4">{{ $listing->title }}</td>
                                 <td class="px-6 py-4">{{ $listing->description }}</td>
+                                <td class="px-6 py-4">
+                                    @foreach ($listing->categories as $category)
+                                        {{ $category->name }}
+                                    @endforeach
+                                </td>
                                 <td class="px-6 py-4">${{ $listing->price }}</td>
                                 <td class="px-6 py-4">
                                     @can('update', $listing)
