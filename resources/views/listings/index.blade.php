@@ -94,7 +94,10 @@
                                 <td class="px-6 py-4">${{ $listing->price }}</td>
                                 <td class="px-6 py-4">
                                     @if ($listing->user_id != auth()->id())
-                                        <a href="" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Save</a>
+                                        @livewire(
+                                            'listing-save-button',
+                                            ['listingId' => $listing->id]
+                                        )
                                     @endif
                                     @can('update', $listing)
                                         <a href="{{ route('listings.edit', $listing) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Edit</a>
