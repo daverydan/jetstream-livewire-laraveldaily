@@ -43,6 +43,11 @@ class ListingController extends Controller
                     $query2->where('id', request('city'));
                 });
             })
+            ->when(request('saved'), function ($query) {
+                $query->whereHas('savedUsers', function ($query2) {
+                    $query2->where('id', auth()->id());
+                });
+            })
             ->paginate(5)
             // returns the previous query w/ new queries to keep values
             ->withQueryString();
