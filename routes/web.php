@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +41,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('listings/{listingId}/photos/{photoId}/delete', [\App\Http\Controllers\ListingController::class, 'deletePhoto'])->name('listings.deletePhoto');
     // Listings
     Route::resource('listings', \App\Http\Controllers\ListingController::class);
+    // Messages
+    Route::resource('messages', \App\Http\Controllers\MessageController::class)->only(['create', 'store']);
 });

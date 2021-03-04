@@ -7,6 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if (session('message'))
+                <div class="mb-4 bg-gray-200 p-2">{{ session('message') }}</div>
+            @endif
+
             <a href="{{ route('listings.create') }}" class="mb-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">{{ __('Add new listing') }}</a>
 
             <div class="mb-4">
@@ -68,7 +72,11 @@
                                         <img src="{{ $listing->getFirstMediaUrl('listings', 'thumb') }}" alt="{{ $listing->title }}">
                                     @endif
                                 </td>
-                                <td class="px-6 py-4">{{ $listing->title }}</td>
+                                <td class="px-6 py-4">
+                                    {{ $listing->title }}
+                                    <br>
+                                    <a href="{{ route('messages.create') }}?listing_id={{ $listing->id }}" class="underline">Message</a>
+                                </td>
                                 <td class="px-6 py-4">{{ $listing->description }}</td>
                                 <td class="px-6 py-4">
                                     @foreach ($listing->categories as $category)
