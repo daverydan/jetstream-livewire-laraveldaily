@@ -40,10 +40,7 @@
                                     @if (request('city') == $city->id) selected @endif>{{ $city->name }}</option>
                         @endforeach
                     </select>
-                    {{-- @livewire('listing-saved-checkbox') --}}
-                    <span class="mx-2">
-                        <input type="checkbox" name="saved"> Saved (0)
-                    </span>
+                    @livewire('listing-saved-checkbox')
                     <button type="submit" class="mb-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Search</button>
                 </form>
             </div>
